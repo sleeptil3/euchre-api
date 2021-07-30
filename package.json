@@ -1,0 +1,21 @@
+{
+  "name": "hackaton-euchre",
+  "version": "0.0.1",
+  "description": "Online Multiplayer version of the classic card game Euchre",
+  "main": "server.js",
+  "author": "sclary110 <sclary@icloud.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.4",
+    "nodemon": "^2.0.12"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  }
+}
