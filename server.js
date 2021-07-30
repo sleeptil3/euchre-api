@@ -2,11 +2,15 @@
 // Imports //
 /////////////
 
-
 const express = require('express')
 require('dotenv').config()
 const mongoose = require('mongoose')
 const cors = require('cors')
+
+
+///////////////
+// Variables //
+///////////////
 
 const app = express()
 const port = process.env.PORT || 3033
@@ -22,6 +26,11 @@ app.use((req, res, next) => {
 	console.log("MIDDLEWARE LOG", req.body)
 	next()
 })
+app.use(function (err, req, res, next) {
+	console.log("ERROR HANDLER!", err, req, res)
+	res.status(500)
+	res.render('error', { error: err })
+})
 
 mongoose.connect(process.env.MONGO_URI, {
 	useUnifiedTopology: true,
@@ -33,17 +42,14 @@ mongoose.connect(process.env.MONGO_URI, {
 mongoose.connection.once('connected', () => console.log('Connected to Mongo, life is good.'))
 
 
-
 ////////////
 // ROUTES //
 ////////////
 
-app.get('/', (req, res) => {
-	res.status(200).json({ msg: "Euchre API root chillin' like a homie" })
+app.all('/', (req, res) => {
+	req.method === 'GET' ? res.status(200).json({ msg: "Euchre API root chillin' like a homie" }) : res.status(405).json({ msg: "Only GET request is valid at root level" })
 })
 app.use('/api', require('./controllers/apiController'))
-
-
 
 
 //////////////
