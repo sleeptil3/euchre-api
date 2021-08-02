@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const { hash } = require('./authController')
 const User = require('../models/User');
 const SECRET = process.env.SECRET_KEY
-
+const Deck = require('../classes/deck')
 
 ////////////
 // CREATE //
@@ -52,6 +52,17 @@ router.post('/login', (req, res) => {
 			}
 		}
 	})
+})
+
+
+// Get Deck
+
+router.get('/deck', (req, res) => {
+	const newDeck = new Deck()
+	newDeck.generateDeck()
+	newDeck.shuffleDeck()
+	res.status(200).json({ 	msg: "Thank you for using the Euchre Deck Creator 5000! May you be in the barn before you know it!",
+							deck: [...newDeck.deck] })
 })
 
 
