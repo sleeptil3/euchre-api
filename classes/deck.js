@@ -1,9 +1,4 @@
-const suits = {
-	"h": { code: "h", name: "Hearts", left: "d" },
-	"d": { code: "d", name: "Diamonds", left: "h" },
-	"s": { code: "s", name: "Spades", left: "c" },
-	"c": { code: "c", name: "Clubs", left: "s" }
-}
+
 
 class Card {
 	static gameValues = {
@@ -18,6 +13,13 @@ class Card {
 		this.faceValue = faceValue
 		this.suit = suits[suitCode]
 		this.value = Card.gameValues[faceValue]
+	}
+}
+
+class Suit {
+	constructor(code, name) {
+		this.code = code
+		this.name = name
 	}
 }
 
@@ -41,5 +43,19 @@ class Deck {
 		}
 	}
 }
+
+const hearts = new Suit("h", "Hearts")
+const diamonds = new Suit("d", "Diamonds")
+const spades = new Suit("s", "Spades")
+const clubs = new Suit("c", "Clubs")
+
+const suits = {
+	"h": { right: hearts, left: diamonds },
+	"d": { right: diamonds, left: hearts },
+	"s": { right: spades, left: clubs },
+	"c": { right: clubs, left: spades }
+}
+
+console.log(suits.d)
 
 module.exports = Deck
