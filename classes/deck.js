@@ -1,8 +1,8 @@
 const suits = {
-	"h": { name: "Hearts", left: "d" },
-	"d": { name: "Diamonds", left: "h" },
-	"s": { name: "Spades", left: "c" },
-	"c": { name: "Clubs", left: "s" }
+	"h": { code: "h", name: "Hearts", left: "d" },
+	"d": { code: "d", name: "Diamonds", left: "h" },
+	"s": { code: "s", name: "Spades", left: "c" },
+	"c": { code: "c", name: "Clubs", left: "s" }
 }
 
 class Card {
