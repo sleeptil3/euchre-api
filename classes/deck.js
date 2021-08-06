@@ -29,7 +29,7 @@ class Deck {
 	generateDeck = () => {
 		for (const suit in suits) {
 			for (const faceValue of Deck.faceValues) {
-				this.deck.push(new Card(faceValue, suit))
+				this.deck.push(new Card(faceValue, suit.code))
 			}
 		}
 	}
@@ -50,12 +50,10 @@ const spades = new Suit("s", "Spades")
 const clubs = new Suit("c", "Clubs")
 
 const suits = {
-	"h": { right: hearts, left: diamonds },
-	"d": { right: diamonds, left: hearts },
-	"s": { right: spades, left: clubs },
-	"c": { right: clubs, left: spades }
+	"h": { ...hearts, left: diamonds },
+	"d": { ...diamonds, left: hearts },
+	"s": { ...spades, left: clubs },
+	"c": { ...clubs, left: spades }
 }
-
-console.log(suits.d)
 
 module.exports = Deck
