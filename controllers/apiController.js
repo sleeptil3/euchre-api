@@ -61,8 +61,10 @@ router.get('/deck', (req, res) => {
 	const newDeck = new Deck()
 	newDeck.generateDeck()
 	newDeck.shuffleDeck()
-	res.status(200).json({ 	msg: "Thank you for using the Euchre Deck Creator 5000! May you be in the barn before you know it!",
-							deck: [...newDeck.deck] })
+	res.status(200).json({
+		msg: "Thank you for using the Euchre Deck Creator 5000! May you be in the barn before you know it!",
+		deck: [...newDeck.deck]
+	})
 })
 
 

@@ -1,4 +1,21 @@
+class Suit {
+	constructor(code, name) {
+		this.code = code
+		this.name = name
+	}
+}
 
+const hearts = new Suit("h", "Hearts")
+const diamonds = new Suit("d", "Diamonds")
+const spades = new Suit("s", "Spades")
+const clubs = new Suit("c", "Clubs")
+
+const suits = {
+	"h": { ...hearts, left: { ...diamonds } },
+	"d": { ...diamonds, left: { ...hearts } },
+	"s": { ...spades, left: { ...clubs } },
+	"c": { ...clubs, left: { ...spades } }
+}
 
 class Card {
 	static gameValues = {
@@ -11,17 +28,11 @@ class Card {
 	}
 	constructor(faceValue, suitCode) {
 		this.faceValue = faceValue
-		this.suit = suits[suitCode]
 		this.value = Card.gameValues[faceValue]
+		this.suit = suits[suitCode]
 	}
 }
 
-class Suit {
-	constructor(code, name) {
-		this.code = code
-		this.name = name
-	}
-}
 
 class Deck {
 	static faceValues = ["9", "10", "J", "Q", "K", "A"]
@@ -29,11 +40,10 @@ class Deck {
 	generateDeck = () => {
 		for (const suit in suits) {
 			for (const faceValue of Deck.faceValues) {
-				this.deck.push(new Card(faceValue, suit.code))
+				this.deck.push(new Card(faceValue, suit))
 			}
 		}
 	}
-
 	// Randomize array in-place using Durstenfeld shuffle algorithm
 	// Resourced from StackOverflow user 'ashleedawg'
 	shuffleDeck = () => {
@@ -44,16 +54,6 @@ class Deck {
 	}
 }
 
-const hearts = new Suit("h", "Hearts")
-const diamonds = new Suit("d", "Diamonds")
-const spades = new Suit("s", "Spades")
-const clubs = new Suit("c", "Clubs")
 
-const suits = {
-	"h": { ...hearts, left: diamonds },
-	"d": { ...diamonds, left: hearts },
-	"s": { ...spades, left: clubs },
-	"c": { ...clubs, left: spades }
-}
 
 module.exports = Deck
